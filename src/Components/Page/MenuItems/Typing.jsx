@@ -115,3 +115,11 @@
     </div>
   </div>
 </div>;
+
+
+
+// To push further changes to github, use these codes 
+
+git add .
+git commit -m "Describe your changes"
+git push

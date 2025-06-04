@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { menuItemModel } from "../../../Interfaces";
 import { useState } from "react";
 import { useUpdateShoppingCartMutation } from "../../../Apis/shoppingCartApi";
+import { MiniLoader } from "../Common";
 
 interface Props {
   menuItem: menuItemModel;
@@ -71,12 +72,7 @@ function MenuItemCard(props: Props) {
                 //zIndex: 10,
               }}
             >
-              <div
-                className={"spinner-border text-warning"}
-                style={{ scale: "100%" }}
-              >
-                <span className="visually-hidden">Loading...</span>
-              </div>
+              <MiniLoader />
             </div>
           ) : (
             <i
