@@ -9,7 +9,7 @@ const shoppingCartApi = createApi({
   endpoints: (builder) => ({
     getShoppingCart: builder.query({
       query: (userId) => ({
-        url: `shoppingart`,
+        url: `shoppingcart`,
         params: {
           userId: userId,
         },

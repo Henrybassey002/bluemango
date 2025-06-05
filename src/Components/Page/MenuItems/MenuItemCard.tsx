@@ -20,7 +20,7 @@ function MenuItemCard(props: Props) {
         menuItemId: menuItemId,
         updateQuantityBy: 1,
         userId: "b7ae37bf-09b1-4b47-9ce1-c963631d2920",
-      }).unwrap();
+      }); //.unwrap()
       console.log("Added to cart", response);
     } catch (error) {
       console.log("Error adding to cart", error);
