@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import type { cartItemModel } from "../../../Interfaces";
+import type { cartItemModel, userModel } from "../../../Interfaces";
 import type { RootState } from "../../../Storage/Redux/store";
 import { useState } from "react";
 import { inputHelper } from "../../../Helper";
@@ -10,13 +10,16 @@ function CartPickUpDetail() {
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
   let grandTotal = 0;
   let totalItems = 0;
 
   const initialUserData = {
-    name: "",
-    email: "",
+    name: userData.fullName,
+    email: userData.email,
     phoneNumber: "",
   };
 

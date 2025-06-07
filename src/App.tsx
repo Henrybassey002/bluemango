@@ -1,21 +1,43 @@
 import { Routes, Route } from "react-router-dom";
 import { Footer, Header } from "./Components/Layout";
-import { Home, MenuItemDetails, NotFound, ShoppingCart } from "./Pages";
-import { useDispatch } from "react-redux";
+import {
+  AccessDenied,
+  AuthenticationTest,
+  AuthenticationTestAdmin,
+  Home,
+  Login,
+  MenuItemDetails,
+  NotFound,
+  Register,
+  ShoppingCart,
+} from "./Pages";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useGetShoppingCartQuery } from "./Apis/shoppingCartApi";
 import { setShoppingCart } from "./Storage/Redux/shoppingCartSlice";
+import type { userModel } from "./Interfaces";
+import { jwtDecode } from "jwt-decode";
+import { setLoggedInUser } from "./Storage/Redux/userAuthSlice";
+import type { RootState } from "./Storage/Redux/store";
 
 function App() {
   const dispatch = useDispatch();
-
-  const { data, isLoading } = useGetShoppingCartQuery(
-    "b7ae37bf-09b1-4b47-9ce1-c963631d2920"
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
   );
+  const { data, isLoading } = useGetShoppingCartQuery(userData.id);
+
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    if (localToken) {
+      const { fullName, id, email, role }: userModel = jwtDecode(localToken);
+      dispatch(setLoggedInUser({ fullName, id, email, role }));
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
-      console.log(data.result);
+      //console.log(data.result);
       dispatch(setShoppingCart(data.result?.cartItems));
     }
   }, [data]);
@@ -31,6 +53,11 @@ function App() {
             element={<MenuItemDetails />}
           />
           <Route path="/shoppingCart" element={<ShoppingCart />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/authentication" element={<AuthenticationTest />} />
+          <Route path="/authorization" element={<AuthenticationTestAdmin />} />
+          <Route path="/accessDenied" element={<AccessDenied />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
