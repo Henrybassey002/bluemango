@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^7.3.1",
     "bootstrap-icons": "^1.13.1",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
