@@ -1,9 +1,13 @@
-import { MenuItemList } from "../Components/Page/MenuItems";
+import { Banner } from "../Components/Page/Common";
+import { MenuItemList } from "../Components/Page/Home";
 
 function Home() {
   return (
     <div>
-      <MenuItemList />
+      <Banner />
+      <div className="container p-2">
+        <MenuItemList />
+      </div>
     </div>
   );
 }
