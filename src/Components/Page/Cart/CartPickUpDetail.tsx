@@ -10,6 +10,7 @@ import { inputHelper } from "../../../Helper";
 import { MiniLoader } from "../Common";
 import { useInitiatePaymentMutation } from "../../../Apis/paymentApi";
 import { useNavigate } from "react-router-dom";
+import OrderSummary from "../Order/OrderSummary";
 
 function CartPickUpDetail() {
   const [loading, setLoading] = useState(false);
@@ -47,6 +48,8 @@ function CartPickUpDetail() {
     setLoading(true);
 
     const { data }: apiResponse = await initiatePayment(userData.id);
+    console.log(data);
+
     //const orderSummary = { grandTotal, totalItems };
     navigate("/payment", {
       state: { apiResult: data?.result, userInput },

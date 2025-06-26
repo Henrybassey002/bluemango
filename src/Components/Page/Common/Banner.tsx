@@ -7,7 +7,7 @@ function Banner() {
         className="m-auto d-flex align-items-center"
         style={{
           width: "400px",
-          height: "500vh",
+          height: "50vh",
         }}
       >
         <div className="d-flex align-items-center" style={{ width: "100%" }}>
@@ -21,7 +21,7 @@ function Banner() {
             placeholder="Search for Food Items!"
           />
           <span style={{ position: "relative", left: "-43px" }}>
-            <i className="bi- bi-search"></i>
+            <i className="bi bi-search"></i>
           </span>
         </div>
       </div>

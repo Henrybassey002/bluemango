@@ -6,8 +6,8 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./Storage";
 import { Provider } from "react-redux";
-//import { ToastContainer } from "react-toastify";
-import { ToastContainer, toast } from "react-toastify";
+//import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 createRoot(document.getElementById("root")!).render(

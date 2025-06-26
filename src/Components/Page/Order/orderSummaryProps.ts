@@ -1,9 +1,9 @@
-import type { cartItemModel } from "../../../Interfaces";
+import type { shoppingCartModel } from "../../../Interfaces";
 
 export interface orderSummaryProps {
   data: {
     id: number;
-    cartItem: cartItemModel;
+    cartItems: shoppingCartModel;
     cartTotal: number;
   };
   userInput: {

@@ -1,3 +1,4 @@
 import OrderSummary from "./OrderSummary";
+//import type { orderSummaryProps } from "./orderSummaryProps";
 
-export { OrderSummary };
+export default { OrderSummary };
