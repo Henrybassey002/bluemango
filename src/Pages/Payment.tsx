@@ -3,9 +3,10 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { PaymentForm } from "../Components/Page/Payment";
 import OrderSummary from "../Components/Page/Order/OrderSummary";
+import type { orderSummaryProps } from "../Components/Page/Order/orderSummaryProps";
 //import  OrderSummary from "../Components/Page/Order";
 
-function Payment() {
+function Payment({ data }: orderSummaryProps) {
   const {
     state: { apiResult, userInput },
   } = useLocation();
@@ -25,8 +26,11 @@ function Payment() {
           <div className="col-md-7">
             <OrderSummary data={apiResult} userInput={userInput} />
           </div>
-          <div className="col-md-5">
-            <PaymentForm />
+          <div className="col-md-4 offset-md-1">
+            <h3 className="text-success">Payment</h3>
+            <div className="mt-5">
+              <PaymentForm data={apiResult} userInput={userInput} />
+            </div>
           </div>
         </div>
       </div>

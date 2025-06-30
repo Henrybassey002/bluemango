@@ -1,34 +1,85 @@
+//import type { cartItemModel } from "../../../Interfaces";
+import { getStatusColor } from "../../../Helper";
 import type { cartItemModel } from "../../../Interfaces";
 import type { orderSummaryProps } from "./orderSummaryProps";
+import { SD_Roles, SD_Status } from "../../../Utility/SD";
+import { useNavigate } from "react-router-dom";
+import type { RootState } from "../../../Storage/Redux/store";
+import { useSelector } from "react-redux";
 
 function OrderSummary({ data, userInput }: orderSummaryProps) {
+  const badgeTypeColor = getStatusColor(data.status!);
+  const navigate = useNavigate();
+  const userData = useSelector((state: RootState) => state.userAuthStore);
+
+  // const nextStatus: data.status! === SD_Status.CONFIRMED
+  // ? {color: "info", value: SD_Status.BEING_COOKED}
+  // : data.status!===SD_Status.BEING_COOKED
+  // ? {color: "warning", value: SD_Status.READY_FOR_PICKUP}
+  // : data.status! === SD_Status.READY_FOR_PICKUP && {
+  //   color: "success",
+  //   value: SD_Status.COMPLETED,};
+
+  const nextStatus: { color: string; value: SD_Status } | undefined =
+    data.status === SD_Status.CONFIRMED
+      ? { color: "info", value: SD_Status.BEING_COOKED }
+      : data.status === SD_Status.BEING_COOKED
+      ? { color: "warning", value: SD_Status.READY_FOR_PICKUP }
+      : data.status === SD_Status.READY_FOR_PICKUP
+      ? { color: "success", value: SD_Status.COMPLETED }
+      : undefined;
+
   return (
     <div>
-      <h3 className="text-success">Order Summary</h3>
+      <div className="d-flex justify-content-between align-items-center">
+        <h3 className="text-success">Order Summary</h3>
+        <span className={`btn btn-outline${badgeTypeColor}`}>
+          {data.status}
+        </span>
+      </div>
+
       <div className="mt-3">
-        <div className="border py-3 px-2">Name :{userInput.name}</div>
-        <div className="border py-3 px-2">Email :{userInput.email}</div>
-        <div className="border py-3 px-2">Phone :{userInput.phoneNumber}</div>
+        <div className="border py-3 px-2">Name : {userInput.name}</div>
+        <div className="border py-3 px-2">Email : {userInput.email}</div>
+        <div className="border py-3 px-2">Phone : {userInput.phoneNumber}</div>
         <div className="border py-3 px-2">
           <h4 className="text-success">Menu Items</h4>
           <div className="p-3">
-            {data.cartItems.map((cartItem: cartItemModel, index: number) => {
+            {data.cartItems?.map((cartItem: cartItemModel, index: number) => {
               return (
                 <div className="d-flex" key={index}>
                   <div className="d-flex w-100 justify-content-between">
-                    <p>Menu Item Name</p>
-                    <p>$10 x 10</p>
+                    <p>{cartItem.menuItem?.name}</p>
+                    <p>
+                      ${cartItem.menuItem?.price} x {cartItem.quantity} =
+                    </p>
                   </div>
-                  <p style={{ width: "70px", textAlign: "right" }}>$100</p>
+                  <p style={{ width: "70px", textAlign: "right" }}>
+                    $
+                    {(cartItem.menuItem?.price ?? 0) * (cartItem.quantity ?? 0)}
+                  </p>
                 </div>
               );
             })}
             <hr />
             <h4 className="text-danger" style={{ textAlign: "right" }}>
-              $100
+              ${data.cartTotal?.toFixed(2)}
             </h4>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <button className="btn btn-seondary" onClick={() => navigate(-1)}>
+          Back to Orders
+        </button>
+        {userData.role == SD_Roles.ADMIN && (
+          <div className="d-flex">
+            <button className="btn btn-danger mx-2">Cancel</button>
+            <button className={`btn btn-${nextStatus?.color}`}>
+              {nextStatus?.value}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

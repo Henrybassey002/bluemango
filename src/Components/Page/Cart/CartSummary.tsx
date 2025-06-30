@@ -29,7 +29,7 @@ function CartSummary() {
       (updateQuantityBy == -1 && cartItem.quantity == 1) ||
       updateQuantityBy == 0
     ) {
-      //remove the item
+      //this remove the item
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: 0,
@@ -37,7 +37,7 @@ function CartSummary() {
       });
       dispatch(removeFromCart({ cartItem, quantity: 0 }));
     } else {
-      //update the quantity with the new quantity
+      //this updates the quantity with the new quantity
       updateShoppingCart({
         menuItemId: cartItem.menuItem?.id,
         updateQuantityBy: updateQuantityBy,

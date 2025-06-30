@@ -1,10 +1,15 @@
 export const SD_Roles = {
   ADMIN: "admin",
   CUSTOMER: "customer",
-}; //as const;
-//export type SD_Roles = (typeof SD_Roles)[keyof typeof SD_Roles];
+};
 
-//export enum SD_Roles {
-//ADMIN = "admin",
-//CUSTOMER = "customer",
-//}
+const SD_Status = {
+  PENDING: "Pending",
+  CONFIRMED: "Confirmed",
+  BEING_COOKED: "Being Cooked",
+  READY_FOR_PICKUP: "Ready for Pickup",
+  COMPLETED: "Completed",
+  CANCELLED: "Cancelled",
+};
+
+export default { SD_Status };
