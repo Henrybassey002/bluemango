@@ -1,4 +1,4 @@
-import { SD_Status } from "../Utility/SD";
+import SD_Status from "../Utility/SD";
 
 const getStatusColor = (status: SD_Status) => {
   return status === SD_Status.CONFIRMED

@@ -8,6 +8,7 @@ import { toastNotify } from "../../../Helper";
 import type { apiResponse, cartItemModel } from "../../../Interfaces";
 import { useCreateOrderMutation } from "../../../Apis/orderApi";
 import type { orderSummaryProps } from "../Order/orderSummaryProps";
+import SD_Status from "../../../Utility/SD";
 
 function PaymentForm({ data, userInput }: orderSummaryProps) {
   const stripe = useStripe();
@@ -58,14 +59,16 @@ function PaymentForm({ data, userInput }: orderSummaryProps) {
         pickupEmail: userInput.email,
         totalItems: totalItems,
         orderTotal: grandTotal,
-        stripePaymentIntentID: data.stripeIntentId,
+        stripePaymentIntentID: data.stripePaymentIntentId,
+        applicationUserID: data.userId,
+        status:
+          result.paymentIntent.status === "succeeded"
+            ? SD_Status.CONFIRMED
+            : SD_Status.PENDING,
       });
       console.log(response);
     }
   };
-  //"applicationUserID":"string",
-
-  //"stripePaymentIntentID":"string",
   //"status":"string",
 
   return (

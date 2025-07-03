@@ -59,7 +59,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://redmangoapi.azurewebsites.net/api/",
+    baseUrl: "https://localhost:7181/api/",
+    //baseUrl: "https://redmangoapi.azurewebsites.net/api/",
   }),
   tagTypes: ["Orders"], // Needed to use `providesTags` or `invalidatesTags`
   endpoints: (builder) => ({

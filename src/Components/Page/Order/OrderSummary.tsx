@@ -2,7 +2,7 @@
 import { getStatusColor } from "../../../Helper";
 import type { cartItemModel } from "../../../Interfaces";
 import type { orderSummaryProps } from "./orderSummaryProps";
-import { SD_Roles, SD_Status } from "../../../Utility/SD";
+import SD_Status, { SD_Roles } from "../../../Utility/SD";
 import { useNavigate } from "react-router-dom";
 import type { RootState } from "../../../Storage/Redux/store";
 import { useSelector } from "react-redux";

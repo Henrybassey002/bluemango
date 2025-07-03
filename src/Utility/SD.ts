@@ -12,4 +12,4 @@ const SD_Status = {
   CANCELLED: "Cancelled",
 };
 
-export default { SD_Status };
+export default SD_Status;
