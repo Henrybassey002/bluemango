@@ -9,12 +9,14 @@ import type { apiResponse, cartItemModel } from "../../../Interfaces";
 import { useCreateOrderMutation } from "../../../Apis/orderApi";
 import type { orderSummaryProps } from "../Order/orderSummaryProps";
 import SD_Status from "../../../Utility/SD";
+import { useNavigate } from "react-router-dom";
 
 function PaymentForm({ data, userInput }: orderSummaryProps) {
   const stripe = useStripe();
   const elements = useElements();
   const [createOrder] = useCreateOrderMutation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,14 +33,11 @@ function PaymentForm({ data, userInput }: orderSummaryProps) {
       },
       redirect: "if_required",
     });
-    console.log(data);
 
     if (result.error) {
       toastNotify("An unexpected error occured.", "error");
       setIsProcessing(false);
     } else {
-      console.log(result);
-
       let grandTotal = 0;
       let totalItems = 0;
       const orderDetailsDTO: any = [];
@@ -59,6 +58,7 @@ function PaymentForm({ data, userInput }: orderSummaryProps) {
         pickupEmail: userInput.email,
         totalItems: totalItems,
         orderTotal: grandTotal,
+        orderDetailsDTO: orderDetailsDTO,
         stripePaymentIntentID: data.stripePaymentIntentId,
         applicationUserID: data.userId,
         status:
@@ -66,15 +66,30 @@ function PaymentForm({ data, userInput }: orderSummaryProps) {
             ? SD_Status.CONFIRMED
             : SD_Status.PENDING,
       });
-      console.log(response);
+      if (response) {
+        if (response.data?.result.status === SD_Status.CONFIRMED) {
+          navigate(
+            `order/orderConfirmed/${response.data?.result.orderHeaderId}`
+          );
+        } else {
+          navigate("/failed"); //add a page based on personal or business requirements
+        }
+      }
     }
+    setIsProcessing(false);
   };
-  //"status":"string",
 
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button className="btn btn-success mt-5 w-100">Submit</button>
+      <button
+        disabled={!stripe || isProcessing}
+        className="btn btn-success mt-5 w-100"
+      >
+        <span id="button-text">
+          {isProcessing ? "processing... " : "Submit Order"}
+        </span>
+      </button>
     </form>
   );
 }

@@ -8,8 +8,12 @@ import AccessDenied from "./AccessDenied";
 import AuthenticationTest from "./AuthenticationTest";
 import AuthenticationTestAdmin from "./AuthenticationTestAdmin";
 import Payment from "./Payment";
+import OrderConfirmed from "./Order/OrderConfirmed";
+import MyOrders from "./Order/MyOrders";
 
 export {
+  MyOrders,
+  OrderConfirmed,
   Home,
   NotFound,
   MenuItemDetails,
