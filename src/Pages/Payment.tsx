@@ -37,6 +37,4 @@ function Payment({ data }: orderSummaryProps) {
     </Elements>
   );
 }
-
 export default Payment;
-//apiResult={apiResult} userInput={userInput}

@@ -9,8 +9,6 @@ const getStatusColor = (status: SD_Status) => {
     ? "danger"
     : status === SD_Status.COMPLETED
     ? "success"
-    : status === SD_Status.CANCELLED
-    ? "danger"
     : status === SD_Status.BEING_COOKED
     ? "info"
     : status === SD_Status.READY_FOR_PICKUP && "warning";
