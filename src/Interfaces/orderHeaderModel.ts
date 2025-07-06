@@ -1,11 +1,13 @@
-export default interface orderHeaderModel {
-  orderHeader?: number;
+import type orderDetail from "./orderDetailModel";
+
+export default interface orderHeader {
+  orderHeaderId?: number;
   pickupName?: string;
   pickupPhoneNumber?: string;
   pickupEmail?: string;
   applicationUserId?: string;
-  user?: string | number | boolean;
-  orderTotal: number;
+  user?: any;
+  orderTotal?: number;
   orderDate?: Date;
   stripePaymentintentID?: string;
   status?: SD_Status;
