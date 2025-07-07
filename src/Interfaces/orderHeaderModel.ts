@@ -1,4 +1,5 @@
 import type orderDetail from "./orderDetailModel";
+import { SD_Status } from "../Utility/SD";
 
 export default interface orderHeader {
   orderHeaderId?: number;

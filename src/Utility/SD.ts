@@ -13,3 +13,12 @@ const SD_Status = {
 };
 
 export default SD_Status;
+
+// export enum SD_Status {
+//   PENDING = "Pending",
+//   CONFIRMED = "Confirmed",
+//   BEING_COOKED = "Being Cooked",
+//   READY_FOR_PICKUP = "Ready for Pickup",
+//   COMPLETED = "Completed",
+//   CANCELLED = "Cancelled",
+// }

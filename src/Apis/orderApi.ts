@@ -42,6 +42,7 @@ const orderApi = createApi({
         },
         body: orderDetails,
       }),
+      invalidatesTags: ["Orders"],
     }),
   }),
 });

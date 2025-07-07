@@ -20,20 +20,30 @@ function OrderSummary({ data, userInput }: orderSummaryProps) {
   //   color: "success",
   //   value: SD_Status.COMPLETED,};
 
-  const nextStatus: { color: string; value: SD_Status } | undefined =
-    data.status === SD_Status.CONFIRMED
+  // const nextStatus: { color: string; value: SD_Status } | undefined =
+  //   data.status === SD_Status.CONFIRMED
+  //     ? { color: "info", value: SD_Status.BEING_COOKED }
+  //     : data.status === SD_Status.BEING_COOKED
+  //     ? { color: "warning", value: SD_Status.READY_FOR_PICKUP }
+  //     : data.status === SD_Status.READY_FOR_PICKUP
+  //     ? { color: "success", value: SD_Status.COMPLETED }
+  //     : undefined;
+
+  const nextStatus: any =
+    data.status! === SD_Status.CONFIRMED
       ? { color: "info", value: SD_Status.BEING_COOKED }
-      : data.status === SD_Status.BEING_COOKED
+      : data.status! === SD_Status.BEING_COOKED
       ? { color: "warning", value: SD_Status.READY_FOR_PICKUP }
-      : data.status === SD_Status.READY_FOR_PICKUP
-      ? { color: "success", value: SD_Status.COMPLETED }
-      : undefined;
+      : data.status! === SD_Status.READY_FOR_PICKUP && {
+          color: "success",
+          value: SD_Status.COMPLETED,
+        };
 
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center">
         <h3 className="text-success">Order Summary</h3>
-        <span className={`btn btn-outline${badgeTypeColor}`}>
+        <span className={`btn btn-outline-${badgeTypeColor} fs-6`}>
           {data.status}
         </span>
       </div>
