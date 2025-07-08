@@ -9,6 +9,7 @@ import {
   Login,
   MenuItemDetails,
   MenuItemList,
+  MenuItemUpsert,
   MyOrders,
   NotFound,
   OrderConfirmed,
@@ -72,6 +73,11 @@ function App() {
           <Route path="/order/orderDetails/:id" element={<OrderDetails />} />
           <Route path="/order/allorders" element={<AllOrders />} />
           <Route path="/menuitem/menuitemlist" element={<MenuItemList />} />
+          <Route
+            path="/menuitem/menuItemUpsert/:id"
+            element={<MenuItemUpsert />}
+          />
+          <Route path="/menuitem/menuItemUpsert" element={<MenuItemUpsert />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
