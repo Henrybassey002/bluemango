@@ -4,6 +4,11 @@ const paymentApi = createApi({
   reducerPath: "paymentApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://redmangoapi.azurewebsites.net/api/",
+    prepareHeaders: (headers: Headers, api) => {
+      const token = localStorage.getItem("token");
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      token && headers.append("Authorization", "Bearer " + token);
+    },
   }),
   endpoints: (builder) => ({
     initiatePayment: builder.mutation({

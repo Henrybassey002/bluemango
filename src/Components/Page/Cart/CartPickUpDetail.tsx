@@ -1,9 +1,5 @@
 import { useSelector } from "react-redux";
-import type {
-  apiResponse,
-  cartItemModel,
-  //userModel,
-} from "../../../Interfaces";
+import type { apiResponse, cartItemModel } from "../../../Interfaces";
 import type { RootState } from "../../../Storage/Redux/store";
 import { useState, useEffect } from "react";
 import { inputHelper } from "../../../Helper";

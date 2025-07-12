@@ -19,7 +19,7 @@ import {
   ShoppingCart,
 } from "./Pages";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGetShoppingCartQuery } from "./Apis/shoppingCartApi";
 import { setShoppingCart } from "./Storage/Redux/shoppingCartSlice";
 import type { userModel } from "./Interfaces";
@@ -29,10 +29,13 @@ import type { RootState } from "./Storage/Redux/store";
 
 function App() {
   const dispatch = useDispatch();
+  //const [skip, setSkip] = useState(true);
   const userData: userModel = useSelector(
     (state: RootState) => state.userAuthStore
   );
-  const { data, isLoading } = useGetShoppingCartQuery(userData.id);
+  const { data, isLoading } = useGetShoppingCartQuery(userData.id, {
+    //skip: skip,
+  });
 
   useEffect(() => {
     const localToken = localStorage.getItem("token");
@@ -47,6 +50,10 @@ function App() {
       dispatch(setShoppingCart(data.result?.cartItems));
     }
   }, [data]);
+
+  // useEffect(() => {
+  //   if (userData.id) setSkip(false);
+  // }, [userData]);
 
   return (
     <div>
@@ -71,7 +78,7 @@ function App() {
           />
           <Route path="/order/myorders" element={<MyOrders />} />
           <Route path="/order/orderDetails/:id" element={<OrderDetails />} />
-          <Route path="/order/allorders" element={<AllOrders />} />
+          <Route path="/order/allOrders" element={<AllOrders />} />
           <Route path="/menuitem/menuitemlist" element={<MenuItemList />} />
           <Route
             path="/menuitem/menuItemUpsert/:id"

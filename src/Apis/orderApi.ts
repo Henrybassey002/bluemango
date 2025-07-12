@@ -4,6 +4,11 @@ const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://redmangoapi.azurewebsites.net/api/",
+    prepareHeaders: (headers: Headers, api) => {
+      const token = localStorage.getItem("token");
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      token && headers.append("Authorization", "Bearer " + token);
+    },
   }),
   tagTypes: ["Orders"],
   endpoints: (builder) => ({
@@ -22,7 +27,7 @@ const orderApi = createApi({
       query: (userId) => ({
         url: "order",
         params: {
-          userId,
+          userId: userId,
         },
       }),
       providesTags: ["Orders"],
