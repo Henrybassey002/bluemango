@@ -51,6 +51,8 @@ function App() {
     }
   }, [data]);
 
+  //console.log(data);
+
   // useEffect(() => {
   //   if (userData.id) setSkip(false);
   // }, [userData]);
